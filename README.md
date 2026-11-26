@@ -38,7 +38,7 @@ same icons (website ke SVG paths -> `res/drawable/ic_*.xml`), same structure: **
 purple tabs, white match card (`res/layout/item_match.xml`), teal `.sec` boxes, wallet hero card, slot grid, join page, withdraw grid, scratch card, etc.
 Layout XML: `res/layout/*.xml` ; shapes: `res/drawable/bg_*.xml` ; logic: `java/com/m7s/battle/*.java`.
 Admin panel se jo images/text/settings badlte ho (logo, banner, game images, announcement, rules, ...) wo APK me bhi wahi aate hain.
-Abhi nahi: website ka Theme picker (colour themes) aur Lottie animations (emoji se replace).
+Lottie animations website jaisi hi hain (assets/anim, lottie-android): Earn, Watch & Earn, Withdraw, Money Converter, Maintenance, Blocked. Abhi nahi: website ka Theme picker.
 
 ## APK me kya hai
 Splash (server se naam/logo/maintenance/update check), Login/Register (+email OTP agar admin ne ON kiya), Forgot password,
@@ -51,3 +51,7 @@ Watch & Earn (AdMob/video), themes picker, slot-booking me multi-winner lucky dr
 
 ## Zaroori note
 Ye code is chat me compile/test nahi ho paya (yahan Android SDK/internet nahi tha). Pehli build me koi chhoti compile error aaye to error text bhej dena, turant fix kar dunga.
+
+
+## Payment WebView
+Online gateway ka payment page ab app ke andar WebView (`WebActivity`) me khulta hai: UPI apps (PhonePe/GPay/Paytm) `upi://` / `intent://` se khulte hain, gateway se wapas aate hi `gateway_return.php` ka result app me dikhta hai (Success / Verifying / Under review / Failed), aur wallet apne aap reload hota hai. Admin / Staff panel bhi isi WebView me khulta hai.
