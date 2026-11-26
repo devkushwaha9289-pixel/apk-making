@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- identical to the website's CSS variables (assets/css/app.css :root) -->
+<resources>
+    <color name="teal">#008080</color>
+    <color name="dark">#1E1E2E</color>
+    <color name="black">#000000</color>
+    <color name="red">#F44336</color>
+    <color name="amber">#FFC107</color>
+    <color name="orange">#FF9800</color>
+    <color name="gold">#FFB300</color>
+    <color name="purple">#6000FF</color>
+    <color name="blue">#008DCD</color>
+    <color name="sky">#03A9F4</color>
+    <color name="slate">#455A64</color>
+    <color name="slate2">#546E7A</color>
+    <color name="lg">#CFD8DC</color>
+    <color name="lg2">#ECEFF1</color>
+    <color name="field">#EEEEEE</color>
+    <color name="green">#4CAF50</color>
+    <color name="cyan">#18FFFF</color>
+    <color name="indigo">#303F9F</color>
+    <color name="menu">#23283A</color>
+    <color name="bg">#1E1E2E</color>
+</resources>
