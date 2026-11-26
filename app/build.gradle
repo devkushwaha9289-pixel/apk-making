@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.application'
+}
+
+def cfg = new Properties()
+file("${rootDir}/config.properties").withInputStream { cfg.load(it) }
+def ks = new Properties()
+def ksFile = file("${rootDir}/keystore.properties")
+if (ksFile.exists()) ksFile.withInputStream { ks.load(it) }
+
+android {
+    namespace 'com.m7s.battle'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId cfg.getProperty('APP_ID', 'com.m7s.battle').trim()
+        minSdk 21
+        targetSdk 34
+        versionCode cfg.getProperty('VERSION_CODE', '1').trim().toInteger()
+        versionName cfg.getProperty('VERSION_NAME', '1.0').trim()
+
+        def base = cfg.getProperty('BASE_URL').trim()
+        if (!base.endsWith('/')) base = base + '/'
+        buildConfigField 'String', 'BASE_URL', "\"${base}\""
+        buildConfigField 'int', 'APP_VERSION_CODE', cfg.getProperty('VERSION_CODE', '1').trim()
+        manifestPlaceholders = [
+            appLabel : cfg.getProperty('APP_NAME', 'Battle').trim(),
+            cleartext: base.startsWith('http://') ? 'true' : 'false'
+        ]
+    }
+
+    signingConfigs {
+        release {
+            if (ksFile.exists()) {
+                storeFile file("${rootDir}/" + ks.getProperty('storeFile'))
+                storePassword ks.getProperty('storePassword')
+                keyAlias ks.getProperty('keyAlias')
+                keyPassword ks.getProperty('keyPassword')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig ksFile.exists() ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    buildFeatures { buildConfig true }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core:1.12.0'
+    implementation 'com.google.firebase:firebase-messaging:23.4.1'
+}
